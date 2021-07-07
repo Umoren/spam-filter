@@ -1,1 +1,1 @@
-web: gunicorn deploy:spam
+web: gunicorn spam:app
