@@ -20,11 +20,11 @@ corpus = pickle.load(open('corpus(1).sav', 'rb'))
 
 
 class Spam(Resource):
-    '''The Resource Spam resource will get messages & shit'''
+    '''The Resource Spam resource will get messages and predict if they are spam'''
     def post(self):
         # new_text = 'I hate this restaurant so much'
         new_text = request.get_json()
-        print(new_text)
+        # print(new_text)
         new_text = new_text['message']
         new_text = re.sub('[^a-zA-Z0-9]', ' ', new_text)
         new_text = new_text.lower()
@@ -52,12 +52,12 @@ class Spam(Resource):
         new_y_pred = loaded_model.predict(new_X_test)[0]
         print(new_y_pred)
         if new_y_pred == 0:
-            result = "Not Spam motherfucker"
+            result = "Non-Spam Detected"
         else:
-            result = "Nah spam o, run for your life"
+            result = "Spam Detected"
 
         return {'Result': result}
 
 
 api.add_resource(Spam, '/')
-app.run(port=5000, debug=True)
+# app.run(port=5000)
